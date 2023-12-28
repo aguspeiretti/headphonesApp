@@ -6,35 +6,38 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
-import products from "../data/productsData";
+import React, { useContext, useState } from "react";
+import productos from "../data/productsData";
 import { colors } from "../global/Colors";
 import { Octicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { globalContext } from "../context/GlobalContext";
 
 const ProductsView = () => {
   const navigation = useNavigation();
-  const [catSelected, setCatSelected] = useState("all");
+
+  const useGlobalContext = useContext(globalContext);
+  const { handleCatSelected, products, catSelected } = useGlobalContext;
 
   return (
     <View style={styles.productsContainer}>
       <View style={styles.selectContainer}>
         <View style={styles.titleCont}>
           <Text
-            onPress={() => setCatSelected("all")}
+            onPress={() => handleCatSelected("all")}
             style={catSelected !== "all" ? styles.title : styles.titleSelected}
           >
             All Products
           </Text>
           {catSelected == "all" ? (
-            <Octicons name="dot-fill" size={24} color="black" />
+            <Octicons name="dot-fill" size={24} color={colors.primary} />
           ) : (
-            <Octicons name="dot" size={24} color="black" />
+            <Octicons name="dot" size={24} color={colors.primary} />
           )}
         </View>
         <View style={styles.titleCont}>
           <Text
-            onPress={() => setCatSelected("discount")}
+            onPress={() => handleCatSelected("discount")}
             style={
               catSelected !== "discount" ? styles.title : styles.titleSelected
             }
@@ -42,14 +45,14 @@ const ProductsView = () => {
             Discount
           </Text>
           {catSelected == "discount" ? (
-            <Octicons name="dot-fill" size={24} color="black" />
+            <Octicons name="dot-fill" size={24} color={colors.primary} />
           ) : (
-            <Octicons name="dot" size={24} color="black" />
+            <Octicons name="dot" size={24} color={colors.primary} />
           )}
         </View>
         <View style={styles.titleCont}>
           <Text
-            onPress={() => setCatSelected("Exclusive")}
+            onPress={() => handleCatSelected("Exclusive")}
             style={
               catSelected !== "Exclusive" ? styles.title : styles.titleSelected
             }
@@ -57,9 +60,9 @@ const ProductsView = () => {
             Exclusive
           </Text>
           {catSelected == "Exclusive" ? (
-            <Octicons name="dot-fill" size={24} color="black" />
+            <Octicons name="dot-fill" size={24} color={colors.primary} />
           ) : (
-            <Octicons name="dot" size={24} color="black" />
+            <Octicons name="dot" size={24} color={colors.primary} />
           )}
         </View>
       </View>

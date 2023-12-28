@@ -1,5 +1,12 @@
-import { View, Image, ScrollView, StyleSheet, Text } from "react-native";
-import React from "react";
+import {
+  View,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+import React, { useContext, useState } from "react";
 import akg from "../../assets/images/akg.png";
 import apple from "../../assets/images/apple.png";
 import beat from "../../assets/images/beat.png";
@@ -13,109 +20,152 @@ import sony from "../../assets/images/sony.png";
 import sure from "../../assets/images/sure.png";
 import tr from "../../assets/images/tr.png";
 import { colors } from "../global/Colors";
+import { globalContext } from "../context/GlobalContext";
 
 const BrandScroll = () => {
+  const useGlobalContext = useContext(globalContext);
+  const { handleBrandSelect } = useGlobalContext;
+
   return (
     <View style={styles.brandScrollContainer}>
-      <Text style={styles.title}>choose Brand</Text>
+      <View style={styles.filterContainer}>
+        <Text style={styles.title}>choose Brand</Text>
+        <Text style={styles.filter}>Clear filter</Text>
+      </View>
       <ScrollView horizontal>
         <View style={styles.brandContainer}>
-          <View style={styles.logoAndName}>
+          <TouchableOpacity
+            onPress={() => handleBrandSelect("Akg")}
+            style={styles.logoAndName}
+          >
             <View style={styles.logoCont}>
               <Image source={akg} resizeMode="contain" style={styles.logo} />
             </View>
             <View style={styles.textCont}>
               <Text>Akg</Text>
             </View>
-          </View>
-          <View style={styles.logoAndName}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleBrandSelect("Apple")}
+            style={styles.logoAndName}
+          >
             <View style={styles.logoCont}>
               <Image source={apple} resizeMode="contain" style={styles.logo} />
             </View>
             <View style={styles.textCont}>
               <Text>Apple</Text>
             </View>
-          </View>
-          <View style={styles.logoAndName}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleBrandSelect("Beats")}
+            style={styles.logoAndName}
+          >
             <View style={styles.logoCont}>
               <Image source={beat} resizeMode="contain" style={styles.logo} />
             </View>
             <View style={styles.textCont}>
               <Text>Beats</Text>
             </View>
-          </View>
-          <View style={styles.logoAndName}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleBrandSelect("Bosse")}
+            style={styles.logoAndName}
+          >
             <View style={styles.logoCont}>
               <Image source={bosse} resizeMode="contain" style={styles.logo} />
             </View>
             <View style={styles.textCont}>
               <Text>Bosse</Text>
             </View>
-          </View>
-          <View style={styles.logoAndName}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleBrandSelect("Bang & Olufsen")}
+            style={styles.logoAndName}
+          >
             <View style={styles.logoCont}>
               <Image source={byo} resizeMode="contain" style={styles.logo} />
             </View>
             <View style={styles.textCont}>
               <Text>Bang & Olufsen</Text>
             </View>
-          </View>
-          <View style={styles.logoAndName}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleBrandSelect("Jabra")}
+            style={styles.logoAndName}
+          >
             <View style={styles.logoCont}>
               <Image source={jabra} resizeMode="contain" style={styles.logo} />
             </View>
             <View style={styles.textCont}>
               <Text>Jabra</Text>
             </View>
-          </View>
-          <View style={styles.logoAndName}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleBrandSelect("Jbl")}
+            style={styles.logoAndName}
+          >
             <View style={styles.logoCont}>
               <Image source={jbl} resizeMode="contain" style={styles.logo} />
             </View>
             <View style={styles.textCont}>
               <Text>JBL</Text>
             </View>
-          </View>
-          <View style={styles.logoAndName}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleBrandSelect("Sennheiser")}
+            style={styles.logoAndName}
+          >
             <View style={styles.logoCont}>
               <Image source={schen} resizeMode="contain" style={styles.logo} />
             </View>
             <View style={styles.textCont}>
               <Text>Sennheiser</Text>
             </View>
-          </View>
-          <View style={styles.logoAndName}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleBrandSelect("Audio-Technica")}
+            style={styles.logoAndName}
+          >
             <View style={styles.logoCont}>
               <Image source={sd} resizeMode="contain" style={styles.logo} />
             </View>
             <View style={styles.textCont}>
               <Text>Audio-Technica</Text>
             </View>
-          </View>
-          <View style={styles.logoAndName}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleBrandSelect("Sony")}
+            style={styles.logoAndName}
+          >
             <View style={styles.logoCont}>
               <Image source={sony} resizeMode="contain" style={styles.logo} />
             </View>
             <View style={styles.textCont}>
               <Text>Sony</Text>
             </View>
-          </View>
-          <View style={styles.logoAndName}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleBrandSelect("Shure")}
+            style={styles.logoAndName}
+          >
             <View style={styles.logoCont}>
               <Image source={sure} resizeMode="contain" style={styles.logo} />
             </View>
             <View style={styles.textCont}>
               <Text>Shure</Text>
             </View>
-          </View>
-          <View style={styles.logoAndName}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleBrandSelect("Beyerdynamic")}
+            style={styles.logoAndName}
+          >
             <View style={styles.logoCont}>
               <Image source={tr} resizeMode="contain" style={styles.logo} />
             </View>
             <View style={styles.textCont}>
               <Text>Beyerdynamic</Text>
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
@@ -161,7 +211,7 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
     color: colors.secondaryLighter,
-    marginBottom: 20,
+
     fontSize: 18,
   },
   logoCont: {
@@ -175,5 +225,16 @@ const styles = StyleSheet.create({
     height: "40%",
     justifyContent: "center",
     alignItems: "center",
+  },
+  filterContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  filter: {
+    fontSize: 15,
+    fontWeight: "500",
+    color: colors.secondaryLighter,
   },
 });

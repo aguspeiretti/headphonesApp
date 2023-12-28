@@ -10,6 +10,8 @@ export default [
     stock: 15,
     brand: "Beats",
     category: "Electrónica",
+    exlusive: false,
+    discount: true,
     thumbnail:
       "https://http2.mlstatic.com/D_NQ_NP_758836-MLA46910766417_072021-O.webp",
     images: [
@@ -29,6 +31,8 @@ export default [
     stock: 20,
     brand: "Audio-Technica",
     category: "Electrónica",
+    exlusive: false,
+    discount: false,
     thumbnail:
       "https://http2.mlstatic.com/D_NQ_NP_684300-MLU72675782587_112023-O.webp",
     images: [
@@ -48,6 +52,8 @@ export default [
     stock: 40,
     brand: "AKG",
     category: "Electrónica",
+    exlusive: false,
+    discount: false,
     thumbnail:
       "https://http2.mlstatic.com/D_NQ_NP_763306-MLA40459801794_012020-O.webp",
     images: [
@@ -67,6 +73,8 @@ export default [
     stock: 25,
     brand: "Beyerdynamic",
     category: "Electrónica",
+    exlusive: false,
+    discount: true,
     thumbnail:
       "https://http2.mlstatic.com/D_NQ_NP_922964-MLA41021065401_032020-O.webp",
     images: [
@@ -86,6 +94,8 @@ export default [
     stock: 30,
     brand: "JBL",
     category: "Electrónica",
+    exlusive: false,
+    discount: false,
     thumbnail:
       "https://http2.mlstatic.com/D_NQ_NP_795068-MLU69392509398_052023-O.webp",
     images: [
@@ -105,6 +115,8 @@ export default [
     stock: 35,
     brand: "Shure",
     category: "Electrónica",
+    exlusive: false,
+    discount: false,
     thumbnail:
       "https://http2.mlstatic.com/D_NQ_NP_963202-MLU70045535452_062023-O.webp",
     images: [
@@ -125,6 +137,8 @@ export default [
     stock: 22,
     brand: "Sony",
     category: "Electrónica",
+    exlusive: false,
+    discount: false,
     thumbnail:
       "https://http2.mlstatic.com/D_NQ_NP_983978-MLA48023382073_102021-O.webp",
     images: [
@@ -144,6 +158,8 @@ export default [
     stock: 18,
     brand: "Sennheiser",
     category: "Electrónica",
+    exlusive: true,
+    discount: false,
     thumbnail:
       "https://http2.mlstatic.com/D_NQ_NP_842308-MLA72226141788_102023-O.webp",
     images: [
@@ -163,6 +179,8 @@ export default [
     stock: 28,
     brand: "Apple",
     category: "Electrónica",
+    exlusive: false,
+    discount: true,
     thumbnail:
       "https://http2.mlstatic.com/D_NQ_NP_923638-MLA54361048207_032023-O.webp",
     images: [
@@ -182,6 +200,8 @@ export default [
     stock: 32,
     brand: "Jabra",
     category: "Electrónica",
+    exlusive: false,
+    discount: false,
     thumbnail:
       "https://http2.mlstatic.com/D_NQ_NP_943103-MLM46758680250_072021-O.webp",
     images: [
@@ -200,6 +220,8 @@ export default [
     stock: 20,
     brand: "Bang & Olufsen",
     category: "Electrónica",
+    exlusive: true,
+    discount: false,
     thumbnail:
       "https://http2.mlstatic.com/D_NQ_NP_600869-MLA41164429590_032020-O.webp",
     images: [
@@ -219,6 +241,8 @@ export default [
     stock: 26,
     brand: "Marshall",
     category: "Electrónica",
+    exlusive: false,
+    discount: false,
     thumbnail:
       "https://http2.mlstatic.com/D_NQ_NP_703531-MLA73105419569_112023-O.webp",
     images: [
@@ -237,6 +261,8 @@ export default [
     stock: 50,
     brand: "Sony",
     category: "Electrónica",
+    exlusive: false,
+    discount: false,
     thumbnail:
       "https://http2.mlstatic.com/D_NQ_NP_647181-MLU73119534126_122023-O.webp",
     images: [
@@ -255,6 +281,8 @@ export default [
     stock: 40,
     brand: "Bose",
     category: "Electrónica",
+    exlusive: false,
+    discount: false,
     thumbnail:
       "https://http2.mlstatic.com/D_NQ_NP_631424-MLA40313621076_012020-O.webp",
     images: [
@@ -272,6 +300,8 @@ export default [
     stock: 25,
     brand: "Sennheiser",
     category: "Electrónica",
+    exlusive: false,
+    discount: false,
     thumbnail:
       "https://http2.mlstatic.com/D_NQ_NP_643519-MLU72461099748_102023-O.webp",
     images: [
