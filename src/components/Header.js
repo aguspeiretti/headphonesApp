@@ -1,15 +1,22 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../global/Colors";
+import { useNavigation } from "@react-navigation/native";
 
 const Header = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.headerContainer}>
-      <View style={styles.sizer1}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("User");
+        }}
+        style={styles.sizer1}
+      >
         <MaterialCommunityIcons name="dots-grid" size={35} color="black" />
-      </View>
+      </TouchableOpacity>
       <View style={styles.sizer2}>
         <Ionicons name="ios-infinite-sharp" size={45} color="black" />
       </View>

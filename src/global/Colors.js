@@ -3,6 +3,7 @@ export const colors = {
   secondary: "#262729",
   secondaryLight: "#2d2d2d",
   secondaryLighter: "#818181",
+  clear: "#f1f1f1",
   white: "#FFFFFF",
   calidwhite: "#FAFAFA",
 };
