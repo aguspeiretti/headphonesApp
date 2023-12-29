@@ -24,13 +24,15 @@ import { globalContext } from "../context/GlobalContext";
 
 const BrandScroll = () => {
   const useGlobalContext = useContext(globalContext);
-  const { handleBrandSelect } = useGlobalContext;
+  const { handleBrandSelect, clearFilter } = useGlobalContext;
 
   return (
     <View style={styles.brandScrollContainer}>
       <View style={styles.filterContainer}>
         <Text style={styles.title}>choose Brand</Text>
-        <Text style={styles.filter}>Clear filter</Text>
+        <TouchableOpacity onPress={() => clearFilter()} style={styles.filter}>
+          <Text>Clear filter</Text>
+        </TouchableOpacity>
       </View>
       <ScrollView horizontal>
         <View style={styles.brandContainer}>

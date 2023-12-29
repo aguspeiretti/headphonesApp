@@ -27,7 +27,12 @@ const Header = () => {
           color="black"
           style={{ marginRight: 15 }}
         />
-        <Feather name="shopping-bag" size={30} color="black" />
+        <Feather
+          onPress={() => navigation.navigate("Cart")}
+          name="shopping-bag"
+          size={30}
+          color="black"
+        />
       </View>
     </View>
   );

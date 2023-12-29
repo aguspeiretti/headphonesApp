@@ -6,24 +6,21 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../global/Colors";
+import { globalContext } from "../context/GlobalContext";
 
 const Search = ({ onSearch }) => {
-  const [search, setSearch] = useState("");
-
-  const handleSearch = (text) => {
-    // Llama a la función de búsqueda pasando el texto actual
-    onSearch(text);
-  };
+  const useGlobalContext = useContext(globalContext);
+  const { handleSearch } = useGlobalContext;
 
   return (
     <View style={styles.searchContainer}>
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.TextInput}
-          onChangeText={handleSearch}
+          onChangeText={(text) => handleSearch(text)}
           placeholder="Search here..."
         ></TextInput>
         <View style={styles.logoContainer}>

@@ -7,6 +7,7 @@ import UserUi from "./src/screens/UserUi";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import GlobalContext from "./src/context/GlobalContext";
+import Cart from "./src/screens/Cart";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -15,9 +16,10 @@ export default function App() {
       <SafeAreaView style={styles.safe}>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Home" component={TabNavigation} />
+            <Stack.Screen name="Principal" component={TabNavigation} />
             <Stack.Screen name="ProductDetail" component={ProductDetail} />
             <Stack.Screen name="User" component={UserUi} />
+            <Stack.Screen name="Cart" component={Cart} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>

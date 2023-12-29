@@ -28,6 +28,7 @@ const ProductDetail = ({ route }) => {
             color={colors.secondaryLight}
           />
           <Feather
+            onPress={() => navigation.navigate("Cart")}
             name="shopping-bag"
             size={30}
             color={colors.secondaryLight}
