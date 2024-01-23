@@ -13,9 +13,8 @@ const Profile = ({ navigation }) => {
   return (
     <>
       <View style={styles.container}>
-        <View>
+        <View style={styles.imgConteiner}>
           <Pressable
-            onPress={() => navigation.navigate("ImageSelector")}
             style={({ pressed }) => [
               {
                 backgroundColor: pressed ? "#DCDCDC" : "#E8E8E8",
@@ -37,13 +36,23 @@ const Profile = ({ navigation }) => {
               />
             )}
           </Pressable>
+          <View>
+            <Pressable
+              onPress={() => navigation.navigate("ImageSelector")}
+              style={styles.fotoAdd}
+            >
+              <Text style={styles.name}>add +</Text>
+            </Pressable>
+          </View>
         </View>
         <View style={styles.userDataContainer}>
           <Text style={styles.userTitle}>{user_data.name}</Text>
           <Text style={styles.userData}>{user_data.role}</Text>
-          <Text style={styles.userData}>Nivel: {user_data.level}</Text>
-          <Text style={styles.userData}>Dirección: {user_data.address}</Text>
-          <Text style={styles.userData}>{user_data.city}</Text>
+          <View style={styles.infoData}>
+            <Text style={styles.userData}>Nivel: {user_data.level}</Text>
+            <Text style={styles.userData}>Dirección: {user_data.address}</Text>
+            <Text style={styles.userData}>{user_data.city}</Text>
+          </View>
         </View>
       </View>
     </>
@@ -54,27 +63,45 @@ export default Profile;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    flexDirection: "column",
     margin: 20,
     gap: 20,
-    alignItems: "flex-start",
+    alignItems: "center",
+    paddingTop: 50,
+  },
+  imgContainer: {
+    position: "relative",
+  },
+  fotoAdd: {
+    backgroundColor: colors.primary,
+    width: 50,
+    height: 30,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    bottom: 10,
+    right: 10,
   },
   profilePicture: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 200,
     borderRadius: 100,
   },
   userDataContainer: {
     marginTop: 10,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   userTitle: {
-    fontSize: 16,
+    fontSize: 20,
   },
   imageContainer: {
-    borderRadius: 100,
+    borderRadius: 200,
   },
   userData: {
-    fontSize: 12,
+    fontSize: 15,
   },
   addressContainer: {
     alignItems: "center",
@@ -90,5 +117,8 @@ const styles = StyleSheet.create({
   },
   addressDescription: {
     color: "#fff",
+  },
+  infoData: {
+    marginTop: 20,
   },
 });

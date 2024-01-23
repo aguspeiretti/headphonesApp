@@ -1,12 +1,18 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../global/Colors";
 import { useNavigation } from "@react-navigation/native";
+import { globalContext } from "../context/GlobalContext";
+import React, { useContext } from "react";
 
 const Header = () => {
+  const useGlobalContext = useContext(globalContext);
+  const { selectedImage } = useGlobalContext;
+
+  const image = selectedImage;
+
   const navigation = useNavigation();
   return (
     <View style={styles.headerContainer}>
@@ -22,13 +28,23 @@ const Header = () => {
         <Ionicons name="ios-infinite-sharp" size={45} color="black" />
       </View>
       <View style={styles.userContainer}>
-        <FontAwesome
-          onPress={() => navigation.navigate("Profile")}
-          name="user-circle-o"
-          size={30}
-          color="black"
-          style={{ marginRight: 15 }}
-        />
+        {image ? (
+          <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+            <Image
+              source={{ uri: image }}
+              style={styles.profilePicture}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
+        ) : (
+          <FontAwesome
+            onPress={() => navigation.navigate("Profile")}
+            name="user-circle-o"
+            size={30}
+            color="black"
+            style={{ marginRight: 15 }}
+          />
+        )}
 
         <MaterialCommunityIcons
           name="line-scan"
@@ -69,5 +85,11 @@ const styles = StyleSheet.create({
   sizer2: {
     width: "33.33%",
     alignItems: "center",
+  },
+  profilePicture: {
+    width: 30,
+    height: 30,
+    borderRadius: 100,
+    marginRight: 15,
   },
 });

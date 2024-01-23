@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   btnConfirm: {
-    backgroundColor: colors.success,
+    backgroundColor: colors.secondary,
     paddingHorizontal: 50,
   },
 });
