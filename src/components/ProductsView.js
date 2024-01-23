@@ -7,7 +7,6 @@ import {
   View,
 } from "react-native";
 import React, { useContext, useState } from "react";
-import productos from "../data/productsData";
 import { colors } from "../global/Colors";
 import { Octicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -17,7 +16,9 @@ const ProductsView = () => {
   const navigation = useNavigation();
 
   const useGlobalContext = useContext(globalContext);
-  const { handleCatSelected, products, catSelected } = useGlobalContext;
+  const { handleCatSelected, products, catSelected  } = useGlobalContext;
+
+ 
 
   return (
     <View style={styles.productsContainer}>

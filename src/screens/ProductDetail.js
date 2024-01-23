@@ -1,17 +1,17 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
-import productsData from "../data/productsData";
+import React, { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import { colors } from "../global/Colors";
+import { globalContext } from "../context/GlobalContext";
 
 const ProductDetail = ({ route }) => {
   const navigation = useNavigation();
   const { productId } = route.params;
+  const useGlobalContext = useContext(globalContext);
+  const { rtData, addToCart } = useGlobalContext;
 
-  const productSelected = productsData.find(
-    (product) => product.id == productId
-  );
+  const productSelected = rtData.find((product) => product.id == productId);
 
   const handleGoBack = () => {
     navigation.goBack();
@@ -61,7 +61,10 @@ const ProductDetail = ({ route }) => {
           <Text style={styles.price}>${productSelected.price}</Text>
         </View>
         <View>
-          <TouchableOpacity style={styles.buttonCart}>
+          <TouchableOpacity
+            onPress={() => addToCart(productSelected)}
+            style={styles.buttonCart}
+          >
             <Feather
               name="shopping-bag"
               size={20}

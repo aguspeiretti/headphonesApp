@@ -1,4 +1,5 @@
 import {
+  Alert,
   ImageBackground,
   StyleSheet,
   Text,
@@ -6,28 +7,22 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import app from "../firbase/config";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firbase/config";
 import Input from "../components/Input";
 import { colors } from "../global/Colors";
 import head from "../../assets/images/headwall.jpg";
 import { Ionicons } from "@expo/vector-icons";
 
-const Login = ({ navigation }) => {
+const SingUp = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const auth = getAuth(app);
-
-  const handleSignIn = () => {
-    signInWithEmailAndPassword(auth, email, password)
+  const handleCreateAccount = () => {
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log("signedIn");
+        console.log("Account Created");
         const user = userCredential.user;
         console.log(user);
       })
@@ -72,9 +67,19 @@ const Login = ({ navigation }) => {
               error={null}
               style={styles.input}
             />
+            <Input
+              label="Repetir contraseña:"
+              onChange={setConfirmPassword}
+              isSecureEntry={true}
+              error={null}
+              style={styles.input}
+            />
           </View>
-          <TouchableOpacity onPress={handleSignIn} style={styles.btnSign}>
-            <Text style={styles.btnText}>Login</Text>
+          <TouchableOpacity
+            onPress={handleCreateAccount}
+            style={styles.btnSign}
+          >
+            <Text style={styles.btnText}>SignUp</Text>
           </TouchableOpacity>
           <View style={styles.btnContainer}>
             <TouchableOpacity
@@ -100,7 +105,7 @@ const Login = ({ navigation }) => {
   );
 };
 
-export default Login;
+export default SingUp;
 
 const styles = StyleSheet.create({
   image: {

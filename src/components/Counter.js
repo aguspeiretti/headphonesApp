@@ -2,14 +2,14 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { colors } from "../global/Colors";
 
-const Counter = () => {
+const Counter = ({ quantity }) => {
   return (
     <View style={styles.counterContainer}>
       <TouchableOpacity style={styles.button}>
         <Text style={styles.counterText}>-</Text>
       </TouchableOpacity>
       <View style={styles.counter}>
-        <Text style={styles.counterText}>1</Text>
+        <Text style={styles.counterText}>{quantity}</Text>
       </View>
       <TouchableOpacity style={styles.button}>
         <Text style={styles.counterText}>+</Text>

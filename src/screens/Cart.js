@@ -1,17 +1,21 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { AntDesign, Octicons } from "@expo/vector-icons";
 import { colors } from "../global/Colors";
 import { useNavigation } from "@react-navigation/native";
 import PIC from "../data/productInCart";
 import Counter from "../components/Counter";
 import { Feather } from "@expo/vector-icons";
+import { globalContext } from "../context/GlobalContext";
 
 const Cart = () => {
   const navigation = useNavigation();
   const handleGoBack = () => {
     navigation.goBack();
   };
+
+  const useGlobalContext = useContext(globalContext);
+  const { cartItems } = useGlobalContext;
 
   return (
     <View style={styles.CartContainer}>
@@ -31,7 +35,7 @@ const Cart = () => {
           />
         </View>
         <View style={styles.cardsContainer}>
-          {PIC.map((p) => (
+          {cartItems.map((p) => (
             <View key={p.id} style={styles.cardCart}>
               <View style={styles.ImageCard}>
                 <Image
@@ -44,7 +48,7 @@ const Cart = () => {
                 <Text>{p.title}</Text>
                 <Text style={styles.price}>${p.price}</Text>
               </View>
-              <Counter />
+              <Counter quantity={p.quantity} />
             </View>
           ))}
         </View>

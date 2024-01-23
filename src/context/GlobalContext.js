@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { createContext, useEffect, useRef, useState } from "react";
-import productos from "../data/productsData";
+import app from "../firbase/config";
+import { getDatabase, ref, onValue } from "firebase/database";
 
 export const globalContext = createContext();
 
@@ -9,23 +10,39 @@ const GlobalContext = ({ children }) => {
   const [catSelected, setCatSelected] = useState("all");
   const [brandSelected, setBrandSelected] = useState(null);
   const [search, setSearch] = useState("");
-  const [cart, setCart] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+  const [rtData, setrtData] = useState([]);
+
+  //traer productos de la base de datos
+
+  useEffect(() => {
+    const db = getDatabase(app);
+    const dbRef = ref(db, "products");
+    console.log("reciving");
+    onValue(dbRef, (snapshot) => {
+      let data = snapshot.val();
+      if (data) {
+        setrtData(data);
+        setProducts(data);
+      }
+    });
+  }, []);
 
   //Filtrado de productos por categoria
 
   const handleCatSelected = (catSelected) => {
     setCatSelected(catSelected);
   };
-  const productFiltredByDiscount = productos.filter(
+  const productFiltredByDiscount = rtData.filter(
     (product) => product.discount == true
   );
-  const productFiltredByExclusive = productos.filter(
-    (product) => product.exlusive == true
+  const productFiltredByExclusive = rtData.filter(
+    (product) => product.exclusive == true
   );
 
   useEffect(() => {
     catSelected === "all"
-      ? setProducts(productos)
+      ? setProducts(rtData)
       : catSelected === "discount"
       ? setProducts(productFiltredByDiscount)
       : setProducts(productFiltredByExclusive);
@@ -47,7 +64,7 @@ const GlobalContext = ({ children }) => {
         );
         setProducts(filteredByBrand);
       } else {
-        const filteredByBrand = productos.filter(
+        const filteredByBrand = rtData.filter(
           (product) => product.brand === brandSelected
         );
         setProducts(filteredByBrand);
@@ -59,7 +76,7 @@ const GlobalContext = ({ children }) => {
 
   const clearFilter = () => {
     setCatSelected("all");
-    setProducts(productos);
+    setProducts(rtData);
     isMounted.current = false;
     setBrandSelected(null);
   };
@@ -71,11 +88,28 @@ const GlobalContext = ({ children }) => {
   };
 
   useEffect(() => {
-    const filtredByBar = productos.filter((product) =>
+    const filtredByBar = rtData.filter((product) =>
       product.title.includes(search)
     );
     setProducts(filtredByBar);
   }, [search]);
+
+  //agregar productos al carrito
+
+  const addToCart = (product) => {
+    const existingItem = cartItems.find((item) => item.id === product.id);
+    if (existingItem) {
+      setCartItems(
+        cartItems.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    }
+  };
 
   return (
     <globalContext.Provider
@@ -86,6 +120,9 @@ const GlobalContext = ({ children }) => {
         handleBrandSelect,
         clearFilter,
         handleSearch,
+        rtData,
+        addToCart,
+        cartItems,
       }}
     >
       {children}

@@ -8,6 +8,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import GlobalContext from "./src/context/GlobalContext";
 import Cart from "./src/screens/Cart";
+import SingUp from "./src/screens/SingUp";
+import Login from "./src/screens/Login";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -20,6 +22,8 @@ export default function App() {
             <Stack.Screen name="ProductDetail" component={ProductDetail} />
             <Stack.Screen name="User" component={UserUi} />
             <Stack.Screen name="Cart" component={Cart} />
+            <Stack.Screen name="SignUp" component={SingUp} />
+            <Stack.Screen name="Login" component={Login} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>

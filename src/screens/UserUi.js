@@ -3,6 +3,7 @@ import {
   ImageBackground,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import React from "react";
@@ -24,11 +25,13 @@ const UserUi = () => {
       id: "1",
       text: "Home",
       icon: <Octicons name="home" size={30} color={colors.clear} />,
+      screen: "Home",
     },
     {
       id: "2",
       text: "Account",
       icon: <Feather name="user" size={30} color={colors.clear} />,
+      screen: "SignUp",
     },
     {
       id: "3",
@@ -47,11 +50,13 @@ const UserUi = () => {
     },
   ];
   const ListItem = ({ item }) => (
+    <TouchableOpacity onPress={() => navigation.navigate(item.screen)}>
     <View style={styles.listItem}>
       <View></View>
       <View style={styles.iconlist}>{item.icon}</View>
       <Text style={styles.textlist}>{item.text}</Text>
     </View>
+    </TouchableOpacity>
   );
 
   return (
