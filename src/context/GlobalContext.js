@@ -12,6 +12,13 @@ const GlobalContext = ({ children }) => {
   const [search, setSearch] = useState("");
   const [cartItems, setCartItems] = useState([]);
   const [rtData, setrtData] = useState([]);
+  const [selectedImage, setSelectedImage] = useState("");
+
+  //setear imagen
+
+  const handleImageConfirm = (image) => {
+    setSelectedImage(image);
+  };
 
   //traer productos de la base de datos
 
@@ -123,6 +130,8 @@ const GlobalContext = ({ children }) => {
         rtData,
         addToCart,
         cartItems,
+        handleImageConfirm,
+        selectedImage,
       }}
     >
       {children}

@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../global/Colors";
 import { useNavigation } from "@react-navigation/native";
@@ -21,6 +22,14 @@ const Header = () => {
         <Ionicons name="ios-infinite-sharp" size={45} color="black" />
       </View>
       <View style={styles.userContainer}>
+        <FontAwesome
+          onPress={() => navigation.navigate("Profile")}
+          name="user-circle-o"
+          size={30}
+          color="black"
+          style={{ marginRight: 15 }}
+        />
+
         <MaterialCommunityIcons
           name="line-scan"
           size={30}

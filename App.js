@@ -10,6 +10,8 @@ import GlobalContext from "./src/context/GlobalContext";
 import Cart from "./src/screens/Cart";
 import SingUp from "./src/screens/SingUp";
 import Login from "./src/screens/Login";
+import Profile from "./src/screens/Profile";
+import ImageSelector from "./src/screens/ImageSelector";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -24,6 +26,8 @@ export default function App() {
             <Stack.Screen name="Cart" component={Cart} />
             <Stack.Screen name="SignUp" component={SingUp} />
             <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Profile" component={Profile} />
+            <Stack.Screen name="ImageSelector" component={ImageSelector} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
