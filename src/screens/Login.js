@@ -5,41 +5,35 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import app from "../firbase/config";
+import React, { useContext, useState } from "react";
+
 import Input from "../components/Input";
 import { colors } from "../global/Colors";
 import head from "../../assets/images/headwall.jpg";
 import { Ionicons } from "@expo/vector-icons";
+import { AntDesign, Feather } from "@expo/vector-icons";
+import { globalContext } from "../context/GlobalContext";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const auth = getAuth(app);
+  const useGlobalContext = useContext(globalContext);
+  const { handleSignIn } = useGlobalContext;
+  const handleGoBack = () => {
+    navigation.goBack();
+  };
 
-  const handleSignIn = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log("signedIn");
-        const user = userCredential.user;
-        console.log(user);
-      })
-      .catch((error) => {
-        console.log(error);
-        Alert.alert(
-          `${error}`,
-          "",
-          [{ text: "OK", onPress: () => console.log("OK Pressed") }],
-          { cancelable: false }
-        );
-      });
+  const handleSing = async () => {
+    try {
+      await handleSignIn(email, password);
+      console.log("SignIn successful");
+      navigation.navigate("Home");
+    } catch (error) {
+      console.error("SignIn error:", error);
+      // Maneja el error según tus necesidades
+    }
   };
 
   return (
@@ -50,12 +44,20 @@ const Login = ({ navigation }) => {
       blurRadius={2}
     >
       <View style={styles.signContainer}>
-        <View style={styles.logo}>
-          <Ionicons
-            name="ios-infinite-sharp"
-            size={45}
-            color={colors.secondary}
+        <View style={styles.parse}>
+          <AntDesign
+            onPress={handleGoBack}
+            name="arrowleft"
+            size={30}
+            color={colors.white}
           />
+          <View style={styles.logo}>
+            <Ionicons
+              name="ios-infinite-sharp"
+              size={45}
+              color={colors.secondary}
+            />
+          </View>
         </View>
         <View style={styles.inputContainer}>
           <View style={styles.inputView}>
@@ -73,7 +75,7 @@ const Login = ({ navigation }) => {
               style={styles.input}
             />
           </View>
-          <TouchableOpacity onPress={handleSignIn} style={styles.btnSign}>
+          <TouchableOpacity onPress={handleSing} style={styles.btnSign}>
             <Text style={styles.btnText}>Login</Text>
           </TouchableOpacity>
           <View style={styles.btnContainer}>
@@ -187,5 +189,10 @@ const styles = StyleSheet.create({
   inputView: {
     width: "100%",
     marginBottom: 40,
+  },
+  parse: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 });

@@ -17,6 +17,15 @@ const Cart = () => {
   const useGlobalContext = useContext(globalContext);
   const { cartItems } = useGlobalContext;
 
+  const calculateTotalPrice = () => {
+    // Use reduce to sum up the prices of all products in the cart
+    const totalPrice = cartItems.reduce(
+      (sum, product) => sum + product.price,
+      0
+    );
+    return totalPrice.toFixed(2); // Format the total price with two decimal places
+  };
+
   return (
     <View style={styles.CartContainer}>
       <View style={styles.contenedorBlanco}>
@@ -46,9 +55,8 @@ const Cart = () => {
               </View>
               <View>
                 <Text>{p.title}</Text>
-                <Text style={styles.price}>${p.price}</Text>
               </View>
-              <Counter quantity={p.quantity} />
+              <Text style={styles.price}>${p.price}</Text>
             </View>
           ))}
         </View>
@@ -63,10 +71,15 @@ const Cart = () => {
       >
         <View style={styles.informacionAdicional}>
           <Text style={styles.priceTitle}>TOTAL PRICE</Text>
-          <Text style={styles.pricetot}>$ 499.98</Text>
+          <Text style={styles.pricetot}>$ {calculateTotalPrice()}r</Text>
         </View>
         <View>
-          <TouchableOpacity style={styles.buttonCart}>
+          <TouchableOpacity
+            style={styles.buttonCart}
+            onPress={() =>
+              navigation.navigate("Purchase", { cartItems: cartItems })
+            }
+          >
             <Feather
               name="shopping-bag"
               size={20}
@@ -143,6 +156,12 @@ const styles = StyleSheet.create({
   pricetot: {
     color: colors.white,
     fontSize: 25,
+    fontWeight: "bold",
+  },
+  price: {
+    color: colors.primary,
+    paddingRight: 10,
+    fontSize: 18,
     fontWeight: "bold",
   },
   priceTitle: {

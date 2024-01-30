@@ -4,6 +4,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { colors } from "../global/Colors";
 import * as ImagePicker from "expo-image-picker";
 import { globalContext } from "../context/GlobalContext";
+import { serviceContext } from "../context/ServContext";
 
 const ImageSelector = ({ navigation }) => {
   const useGlobalContext = useContext(globalContext);
@@ -42,6 +43,12 @@ const ImageSelector = ({ navigation }) => {
     console.log("hola");
     handleImageConfirm(image);
     navigation.goBack();
+  };
+
+  //prueba
+  const usuario = {
+    nombre: "Ejemplo",
+    apellido: "Usuario",
   };
 
   return (

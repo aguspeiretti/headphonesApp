@@ -1,7 +1,13 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import React, { createContext, useEffect, useRef, useState } from "react";
 import app from "../firbase/config";
 import { getDatabase, ref, onValue } from "firebase/database";
+import { useNavigation } from "@react-navigation/native";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 export const globalContext = createContext();
 
@@ -13,6 +19,7 @@ const GlobalContext = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [rtData, setrtData] = useState([]);
   const [selectedImage, setSelectedImage] = useState("");
+  const [user, setUser] = useState("");
 
   //setear imagen
 
@@ -118,6 +125,33 @@ const GlobalContext = ({ children }) => {
     }
   };
 
+  //setear Usuario
+  const handleSignIn = async (email, password) => {
+    try {
+      const authorization = getAuth(app);
+      const userCredential = await signInWithEmailAndPassword(
+        authorization,
+        email,
+        password
+      );
+      console.log("signedIn");
+      const user = userCredential.user;
+      console.log(user);
+      setUser(user.email);
+
+      return user; // Devuelve el usuario para indicar que la operación se completó correctamente
+    } catch (error) {
+      console.log(error);
+      Alert.alert(
+        `${error}`,
+        "",
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
+      throw error; // Relanza el error para que pueda ser manejado en el lugar donde se llamó a handleSignIn
+    }
+  };
+
   return (
     <globalContext.Provider
       value={{
@@ -132,6 +166,8 @@ const GlobalContext = ({ children }) => {
         cartItems,
         handleImageConfirm,
         selectedImage,
+        handleSignIn,
+        user,
       }}
     >
       {children}

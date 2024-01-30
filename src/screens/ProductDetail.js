@@ -17,6 +17,11 @@ const ProductDetail = ({ route }) => {
     navigation.goBack();
   };
 
+  const addToCartAndNavigateToCart = (product) => {
+    addToCart(product);
+    navigation.navigate("Cart");
+  };
+
   return (
     <View style={styles.ProductDetailContainer}>
       <View style={styles.contenedorBlanco}>
@@ -62,7 +67,7 @@ const ProductDetail = ({ route }) => {
         </View>
         <View>
           <TouchableOpacity
-            onPress={() => addToCart(productSelected)}
+            onPress={() => addToCartAndNavigateToCart(productSelected)}
             style={styles.buttonCart}
           >
             <Feather

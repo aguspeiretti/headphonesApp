@@ -13,13 +13,35 @@ import Input from "../components/Input";
 import { colors } from "../global/Colors";
 import head from "../../assets/images/headwall.jpg";
 import { Ionicons } from "@expo/vector-icons";
+import { base_url } from "../firbase/database";
+import { AntDesign, Feather } from "@expo/vector-icons";
 
 const SingUp = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [city, setCity] = useState("");
+  const [direct, setDirect] = useState("");
 
-  const handleCreateAccount = () => {
+  const handleGoBack = () => {
+    navigation.goBack();
+  };
+
+  const postUser = async (email, password, city, direct) => {
+    data = {
+      email: email,
+      password: password,
+      city: city,
+      direct: direct,
+    };
+    console.log(data);
+    const response = await fetch(base_url + "usuarios.json", {
+      method: "PUT",
+      body: JSON.stringify(data),
+    });
+  };
+
+  const handleCreateAccount = async () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log("Account Created");
@@ -35,6 +57,8 @@ const SingUp = ({ navigation }) => {
           { cancelable: false }
         );
       });
+    await postUser(email, password, city, direct);
+    navigation.navigate("Login");
   };
 
   return (
@@ -45,12 +69,20 @@ const SingUp = ({ navigation }) => {
       blurRadius={2}
     >
       <View style={styles.signContainer}>
-        <View style={styles.logo}>
-          <Ionicons
-            name="ios-infinite-sharp"
-            size={45}
-            color={colors.secondary}
+        <View style={styles.parse}>
+          <AntDesign
+            onPress={handleGoBack}
+            name="arrowleft"
+            size={30}
+            color={colors.white}
           />
+          <View style={styles.logo}>
+            <Ionicons
+              name="ios-infinite-sharp"
+              size={45}
+              color={colors.secondary}
+            />
+          </View>
         </View>
         <View style={styles.inputContainer}>
           <View style={styles.inputView}>
@@ -67,10 +99,18 @@ const SingUp = ({ navigation }) => {
               error={null}
               style={styles.input}
             />
+
             <Input
-              label="Repetir contraseña:"
-              onChange={setConfirmPassword}
-              isSecureEntry={true}
+              label="Direccion:"
+              onChange={setDirect}
+              isSecureEntry={false}
+              error={null}
+              style={styles.input}
+            />
+            <Input
+              label="Ciudad:"
+              onChange={setCity}
+              isSecureEntry={false}
               error={null}
               style={styles.input}
             />
@@ -192,5 +232,10 @@ const styles = StyleSheet.create({
   inputView: {
     width: "100%",
     marginBottom: 40,
+  },
+  parse: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 });
